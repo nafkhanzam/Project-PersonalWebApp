@@ -1,3 +1,1 @@
-import { Main } from "./Main";
-
-Main.main();
+console.log("Server started!");
