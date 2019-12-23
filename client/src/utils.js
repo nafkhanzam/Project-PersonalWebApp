@@ -1,4 +1,5 @@
 import showdown from "showdown";
+import axios from "axios";
 
 export function classOnHover(tag, className) {
     $(document).ready(function() {
@@ -14,13 +15,17 @@ export function classOnHover(tag, className) {
 }
 
 export async function getNIMData() {
-    let data = await fetch("/assets/nim_data.json");
-    data = await data.json();
-    return JSON.stringify(data.data);
+    return JSON.stringify((await axios("/assets/nim_data.json")).data.data);
 }
 
 export async function getBlog(name) {
-    const res = await fetch(`/assets/blogs/${name}.md`);
-    const md = await res.text();
-    return (new showdown.Converter()).makeHtml(md);
+    try {
+        const res = await axios(`/assets/blogs/${name}.md`);
+        if (res.headers["content-type"].includes("html")) {
+            return null;
+        }
+        return (new showdown.Converter()).makeHtml(res.data);
+    } catch (_) {
+        return null;
+    }
 }

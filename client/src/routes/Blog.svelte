@@ -1,6 +1,9 @@
 <script>
   import { getBlog } from "../utils";
+  import NotFound from "./notFound.svelte";
   export let blog;
+
+  let message = `Blog "${blog}" can't be found!`;
 
   let contentPromise;
   function updateContent() {
@@ -14,5 +17,9 @@
 {#await contentPromise}
   <p>Loading...</p>
 {:then htmlResult}
-  {@html htmlResult}
+  {#if htmlResult === null}
+    <NotFound {message} />
+  {:else}
+    {@html htmlResult}
+  {/if}
 {/await}

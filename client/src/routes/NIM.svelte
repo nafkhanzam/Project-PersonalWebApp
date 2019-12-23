@@ -1,7 +1,10 @@
 <script>
   import { getNIMData, classOnHover } from "../utils";
 
-  classOnHover(".loadmore", "bg-secondary text-white");
+  function setLoadmoreHover() {
+    classOnHover(".loadmore", "bg-primary text-white");
+  }
+  setLoadmoreHover();
 
   const LOCAL_STORAGE_NAME = "nafkhanzam-nim-data";
   const LOCAL_STORAGE_VERSION = "nafkhanzam-nim-version";
@@ -13,6 +16,7 @@
   let loading = true;
   let value = "";
   async function getResultAsync() {
+    setLoadmoreHover();
     max = DEFAULT_MAX;
     data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME));
     const lowerCaseValue = value.toLowerCase();

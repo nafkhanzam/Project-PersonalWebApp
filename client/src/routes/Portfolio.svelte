@@ -1,5 +1,7 @@
-<a href="#!" on:click={
-  async () => {
+<script>
+  async function downloadCV() {
     return await fetch("/assets/CV v1.1.4.pdf");
   }
-}>Download CV</a>
+</script>
+
+<a href="#!" on:click={downloadCV}>Download CV</a>

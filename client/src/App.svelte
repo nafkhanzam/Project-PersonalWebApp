@@ -22,6 +22,7 @@
       <Route path="/blog/:blog" let:params><Blog blog={params.blog} /></Route>
       <Route path="/nim" component={NIM} />
       <Route path="/">{navigate("/home")}</Route>
+      <Route path="/api/*"></Route>
       <Route component={notFound} />
     </Router>
   </div>
