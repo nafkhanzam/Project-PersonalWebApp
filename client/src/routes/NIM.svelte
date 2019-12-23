@@ -2,7 +2,7 @@
   import { getNIMData, classOnHover } from "../utils";
 
   function setLoadmoreHover() {
-    classOnHover(".loadmore", "bg-primary text-white");
+    classOnHover(".loadmore", "bg-dark text-white");
   }
   setLoadmoreHover();
 

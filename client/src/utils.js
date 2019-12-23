@@ -15,16 +15,30 @@ export function classOnHover(tag, className) {
 }
 
 export async function getNIMData() {
-    return JSON.stringify((await axios("/assets/nim_data.json")).data.data);
+    return JSON.stringify((await getJSON("/assets/nim_data.json")).data);
+}
+
+export async function getJSON(path) {
+    return (await axios(path)).data;
+}
+
+export function toPrettyDate(data) {
+    if (!data) data = new Date(0, 0, 0);
+    return new Intl.DateTimeFormat('en-AU').format(typeof(data) === "string" ? new Date(data) : data);
+}
+
+function isHtml(res) {
+    return res.headers["content-type"].includes("html");
 }
 
 export async function getBlog(name) {
     try {
         const res = await axios(`/assets/blogs/${name}.md`);
-        if (res.headers["content-type"].includes("html")) {
+        const data = await axios(`/assets/blogs/${name}.json`);
+        if (isHtml(res) || isHtml(data)) {
             return null;
         }
-        return (new showdown.Converter()).makeHtml(res.data);
+        return [data.data, (new showdown.Converter()).makeHtml(res.data)];
     } catch (_) {
         return null;
     }

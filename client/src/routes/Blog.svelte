@@ -1,9 +1,10 @@
 <script>
-  import { getBlog } from "../utils";
+  import { getBlog, toPrettyDate } from "../utils";
   import NotFound from "./notFound.svelte";
   export let blog;
 
   let message = `Blog "${blog}" can't be found!`;
+  let date;
 
   let contentPromise;
   function updateContent() {
@@ -16,10 +17,13 @@
 
 {#await contentPromise}
   <p>Loading...</p>
-{:then htmlResult}
-  {#if htmlResult === null}
+{:then result}
+  {#if !result || result.length < 2 || !result[0] || !result[1]}
     <NotFound {message} />
   {:else}
-    {@html htmlResult}
+    <h1>{result[0].title}</h1>
+    Posted {toPrettyDate(result[0].date)} by <u>{result[0].author || "nafkhanzam"}</u>
+    <hr />
+    {@html result[1]}
   {/if}
 {/await}
