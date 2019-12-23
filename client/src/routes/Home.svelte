@@ -1,10 +1,11 @@
 <script>
-  import { classOnHover } from "../utils";
-  classOnHover(".menu", "shadow");
+  import { onHover } from "../utils";
+  onHover(".addshadow", "shadow-lg");
+
   let menus = [
     {
       title: "Portfolio",
-      href: "/portfolio",
+      // href: "/portfolio",
     },
     {
       title: "Blog",
@@ -12,6 +13,7 @@
     },
     {
       title: "Apps",
+      // href: "/apps",
     },
     {
       title: "NIM Finder",
@@ -21,12 +23,16 @@
 </script>
 
 {#each menus as menu}
-  <div class="menu media position-relative mt-3 p-2 border rounded">
+  <div class={"media position-relative mt-3 p-2 rounded bg-dark" + (menu.href ? " addshadow" : "")}>
     <img class="mr-3" height="128" width="128" src={menu.img || "/favicon.png"} alt={menu.imgAlt || menu.title || "Unknown image"}>
     <div class="media-body">
       <h5 class="mt-0">{menu.title || ""}</h5>
-      {menu.desc || ""}
-      <a href={menu.href} class="stretched-link">{""}</a>
+      {#if menu.href}
+        {@html menu.desc || ""}
+        <a href={menu.href} class="stretched-link">{""}</a>
+      {:else}
+        <div style="color: darkorange;">Under construction</div>
+      {/if}
     </div>
   </div>
 {/each}

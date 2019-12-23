@@ -7,7 +7,7 @@
       .map(async (val) => {
         const blogData = await getJSON(`/assets/blogs/${val}.json`);
         return { url: val, ...blogData };
-      }));
+      }).sort(data => data.date));
   }
 </script>
 

@@ -1,11 +1,13 @@
 import showdown from "showdown";
 import axios from "axios";
 
-export function classOnHover(tag, className) {
+export function onHover(tag, className, pointerCursor) {
     $(document).ready(function() {
         $(tag).hover(
             function() {
-                $(this).addClass(className).css('cursor', 'pointer');
+                $(this).addClass(className)
+                if (pointerCursor)
+                    $(this).css('cursor', 'pointer');
             },
             function() {
                 $(this).removeClass(className);

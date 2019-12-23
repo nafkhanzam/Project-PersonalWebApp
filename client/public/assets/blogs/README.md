@@ -1,5 +1,5 @@
 *Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-![nice image](../../favicon.png "Logo Title Text 1")
+
 ---
 
 # svelte app

@@ -4,8 +4,6 @@
   export let blog;
 
   let message = `Blog "${blog}" can't be found!`;
-  let date;
-
   let contentPromise;
   function updateContent() {
     contentPromise = (async function() {
@@ -15,6 +13,7 @@
   updateContent();
 </script>
 
+<a href="/blog">{"<"} Back to blog list</a>
 {#await contentPromise}
   <p>Loading...</p>
 {:then result}
