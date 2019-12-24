@@ -14,7 +14,8 @@
   updateContent();
 </script>
 
-<a href="/blog">{"<"} Back to blog list</a><br />
+<a href="/blog">{'<'} Back to blog list</a>
+<br />
 {#await contentPromise}
   <Loading />
 {:then result}
@@ -22,7 +23,8 @@
     <NotFound {message} />
   {:else}
     <h1>{result[0].title}</h1>
-    Posted {toPrettyDate(result[0].date)} by <u>{result[0].author || "nafkhanzam"}</u>
+    Posted {toPrettyDate(result[0].date)} by
+    <u>{result[0].author || 'nafkhanzam'}</u>
     <hr />
     {@html result[1]}
   {/if}

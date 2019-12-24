@@ -1,5 +1,3 @@
-
-
 <style>
   .loader-container {
     width: 50vw;
@@ -41,5 +39,5 @@
 </style>
 
 <div class="loader-container">
-  <div class="loader"></div>
+  <div class="loader" />
 </div>

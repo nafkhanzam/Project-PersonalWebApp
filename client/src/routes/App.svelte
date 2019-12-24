@@ -6,11 +6,12 @@
   appName = appName.toLowerCase();
   let message = `App "${appName}" can't be found!`;
   let appMap = {
-    "calculator": Calculator
-  }
+    calculator: Calculator
+  };
 </script>
 
-<a href="/app">{"<"} Back to app list</a><br />
+<a href="/app">{'<'} Back to app list</a>
+<br />
 {#if appMap[appName]}
   <svelte:component this={appMap[appName]} />
 {:else}

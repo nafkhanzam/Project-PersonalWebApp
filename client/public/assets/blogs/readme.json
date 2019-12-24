@@ -1,5 +1,6 @@
 {
-    "title": "README.md from svelte template",
-    "date": "2019-12-22T17:00:00.000Z",
-    "author": "svelte-template"
+	"title": "README.md from svelte template",
+	"date": "2019-12-22T17:00:00.000Z",
+	"author": "svelte-template",
+	"tags": ["test", "other test"]
 }

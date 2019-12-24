@@ -20,13 +20,17 @@
       <Route exact path="/home" component={Home} />
       <Route path="/portfolio" component={Portfolio} />
       <Route exact path="/blog" component={Blogs} />
-      <Route path="/blog/:blog" let:params><Blog blog={params.blog} /></Route>
+      <Route path="/blog/:blog" let:params>
+        <Blog blog={params.blog} />
+      </Route>
       <Route path="/nim" component={NIM} />
       <Route path="/app" component={Apps} />
-      <Route path="/app/:appName" let:params><App appName={params.appName} /></Route>
+      <Route path="/app/:appName" let:params>
+        <App appName={params.appName} />
+      </Route>
       <Route path="/admin" component={Admin} />
-      <Route path="/">{location.replace("/home")}</Route>
-      <Route path="/api/*"></Route>
+      <Route path="/">{location.replace('/home')}</Route>
+      <Route path="/api/*" />
       <Route component={notFound} />
     </Router>
   </div>
