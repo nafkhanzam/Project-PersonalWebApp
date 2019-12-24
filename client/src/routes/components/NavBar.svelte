@@ -9,7 +9,7 @@
 </svelte:head>
 
 <nav class="navbar sticky-top navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">{title}</a>
+  <a class="navbar-brand" href="/home">{title}</a>
   <ul class="nav justify-content-end">
     <li class="nav-item">
       <a class="nav-link text-white" href="/admin">Admin ></a>

@@ -1,5 +1,6 @@
 <script>
   import { getJSON, toPrettyDate } from "../utils";
+  import Loading from "./components/Loading.svelte";
 
   let blogsPromise = getBlogs();
   async function getBlogs() {
@@ -14,13 +15,13 @@
 <h1>Blogs</h1>
 <hr />
 {#await blogsPromise}
-  <p>Loading...</p>
+  <Loading />
 {:then list}
   <ul>
     {#each list as blog}
       {#if blog && blog.title}
         <li>
-          <a href={`/blog/${blog.url}`}>[{toPrettyDate(blog.date)}] {blog.title}</a>
+          <a href={`/blog/${blog.url}`}>[{toPrettyDate(blog.date)}] {blog.title} [by {blog.author}]</a>
         </li>
       {/if}
     {/each}

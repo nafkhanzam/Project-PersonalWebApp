@@ -1,7 +1,8 @@
 <script>
   import { getNIMData, onHover } from "../utils";
+  import Loading from "./components/Loading.svelte";
 
-  let sortIdx = 0;
+  let sortIdx = -1;
   function setLoadmoreHover() {
     onHover(".loadmore", "bg-dark text-white", true);
   }
@@ -67,16 +68,16 @@
 <div class="mt-3">
   {#if resPromise}
     {#await resPromise}
-      <p>Loading...</p>
+      <Loading />
     {:then res}
       {#if res}
         <table class="table">
           <thead>
             <tr>
-              <th style="width: 10%" scope="col"><a href="#!" on:click={() => updateResult(-1)}>#</a> {sortIdx === -1 ? "(random)" : ""}</th>
-              <th style="width: 50%" scope="col"><a href="#!" on:click={() => updateResult(0)}>Name</a> {sortIdx === 0 ? "(sorted)" : ""}</th>
-              <th style="width: 20%" scope="col"><a href="#!" on:click={() => updateResult(1)}>NIM 1</a> {sortIdx === 1 ? "(sorted)" : ""}</th>
-              <th style="width: 20%" scope="col"><a href="#!" on:click={() => updateResult(2)}>NIM 2</a> {sortIdx === 2 ? "(sorted)" : ""}</th>
+              <th style="width: 15%" scope="col"><a href="javascript:void(0)" on:click={() => updateResult(-1)}>{@html sortIdx === -1 ? "<u># (random)</u>" : "# (random)"}</a></th>
+              <th style="width: 45%" scope="col"><a href="javascript:void(0)" on:click={() => updateResult(0)}>{@html sortIdx === 0 ? "<u>Name</u>" : "Name"}</a></th>
+              <th style="width: 20%" scope="col"><a href="javascript:void(0)" on:click={() => updateResult(1)}>{@html sortIdx === 1 ? "<u>NIM 1</u>" : "NIM 1"}</a></th>
+              <th style="width: 20%" scope="col"><a href="javascript:void(0)" on:click={() => updateResult(2)}>{@html sortIdx === 2 ? "<u>NIM 2</u>" : "NIM 2"}</a></th>
             </tr>
           </thead>
           <tbody>
@@ -100,5 +101,7 @@
         </table>
       {/if}
     {/await}
+  {:else}
+    <Loading />
   {/if}
 </div>

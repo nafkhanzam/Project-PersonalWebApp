@@ -1,6 +1,7 @@
 <script>
   import { getBlog, toPrettyDate } from "../utils";
   import NotFound from "./notFound.svelte";
+  import Loading from "./components/Loading.svelte";
   export let blog;
 
   let message = `Blog "${blog}" can't be found!`;
@@ -13,9 +14,9 @@
   updateContent();
 </script>
 
-<a href="/blog">{"<"} Back to blog list</a>
+<a href="/blog">{"<"} Back to blog list</a><br />
 {#await contentPromise}
-  <p>Loading...</p>
+  <Loading />
 {:then result}
   {#if !result || result.length < 2 || !result[0] || !result[1]}
     <NotFound {message} />
