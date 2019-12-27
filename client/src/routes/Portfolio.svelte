@@ -1,16 +1,12 @@
 <script>
   import axios from "axios";
+  import { downloadCV } from "../utils";
 
   let downloading = false;
   let hover = false;
-  function downloadCV() {
+  function handleDownloadCV() {
     downloading = true;
-    axios({
-      url: "/assets/CV v1.1.4.pdf",
-      method: "GET",
-      responseType: "blob",
-      "Cache-Control": "no-cache"
-    }).then(response => {
+    downloadCV().then(response => {
       if (
         response.status >= 400 ||
         (response.headers["content-type"] &&
@@ -31,7 +27,7 @@
 <button
   type="button"
   class="btn btn-primary"
-  on:click={downloadCV}
+  on:click={handleDownloadCV}
   disabled={downloading}>
   {downloading ? 'Downloading CV...' : 'Download CV'}
 </button>

@@ -20,7 +20,7 @@
 
   function getSorter() {
     if (sortIdx === -1) {
-      return () => Math.random() < 0.5;
+      return () => Math.random() - 0.5;
     } else {
       return (a, b) => a[sortIdx].localeCompare(b[sortIdx]);
     }

@@ -15,8 +15,16 @@ export function onHover(tag, className, pointerCursor) {
 	});
 }
 
+export function downloadCV() {
+	return axios({
+		url: "/api/CV v1.1.4.pdf",
+		method: "GET",
+		responseType: "blob",
+	});
+}
+
 export async function getNIMData() {
-	return JSON.stringify((await getJSON("/assets/nim_data.json")).data);
+	return JSON.stringify((await getJSON("/api/nim_data.json")).data);
 }
 
 export async function getJSON(path) {
@@ -43,8 +51,8 @@ export function isHtml(res) {
 
 export async function getBlog(name) {
 	try {
-		const res = await axios(`/assets/blogs/${name}.md`);
-		const data = await axios(`/assets/blogs/${name}.json`);
+		const res = await axios(`/api/blogs/${name}.md`);
+		const data = await axios(`/api/blogs/${name}.json`);
 		if (isHtml(res) || isHtml(data)) {
 			return null;
 		}

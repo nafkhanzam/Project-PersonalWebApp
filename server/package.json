@@ -1,15 +1,24 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "description": "My Personal Website",
-  "main": "dist/index.js",
-  "repository": "https://github.com/nafkhanzam/website.git",
-  "author": "nafkhanzam <nafkhanalzamzami@gmail.com>",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "build": "(if exist dist rmdir dist /s /q) && tsc",
-    "start": "node dist",
-    "dev": "nodemon --watch src/ --exec \"ts-node src\" -e ts"
-  }
+	"name": "website",
+	"version": "1.0.0",
+	"description": "My Personal Website",
+	"main": "dist/index.js",
+	"repository": "https://github.com/nafkhanzam/website.git",
+	"author": "nafkhanzam <nafkhanalzamzami@gmail.com>",
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"build": "(if exist dist rmdir dist /s /q) && tsc",
+		"start": "node dist",
+		"dev": "nodemon"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"pingmydyno": "^1.5.1"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.6",
+		"@types/express": "^4.17.2"
+	}
 }

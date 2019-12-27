@@ -9,9 +9,9 @@
   async function getBlogs() {
     tags.clear();
     blogsPromise = await Promise.all(
-      (await getJSON("/assets/blogs.json")).data
+      (await getJSON("/api/blogs.json")).data
         .map(async val => {
-          const blogData = await getJSON(`/assets/blogs/${val}.json`);
+          const blogData = await getJSON(`/api/blogs/${val}.json`);
           if (!blogData) return null;
           if (blogData.tags) blogData.tags.forEach(tag => tags.add(tag));
           return { url: val, ...blogData };
