@@ -1,23 +1,24 @@
 <script>
   import { onHover } from "../utils";
+  import routes from "../routes";
   onHover(".addshadow", "shadow-lg");
 
   let menus = [
     {
-      title: "Portfolio"
-      // href: "/portfolio",
+      title: "Portfolio",
+      href: routes.portfolio,
     },
     {
       title: "Blog",
-      href: "/blog"
+      href: routes.blogs,
     },
     {
       title: "Apps",
-      href: "/app"
+      href: routes.apps,
     },
     {
       title: "NIM Finder",
-      href: "/nim"
+      href: routes.nim,
     }
   ];
 </script>

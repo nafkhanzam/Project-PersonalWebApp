@@ -3,6 +3,8 @@
   import { getBlog } from "../assets";
   import NotFound from "./notFound.svelte";
   import Loading from "./components/Loading.svelte";
+  import routes from "../routes";
+
   export let blog;
 
   let message = `Blog "${blog}" can't be found!`;
@@ -15,7 +17,7 @@
   updateContent();
 </script>
 
-<a href="/blog">{'<'} Back to blog list</a>
+<a href={routes.blogs}>{'<'} Back to blog list</a>
 <br />
 {#await contentPromise}
   <Loading />

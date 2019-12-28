@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "axios": "^0.19.0",
+        "showdown": "^1.9.1",
         "sirv-cli": "^0.4.4",
         "svelte-navaid": "^0.1.1"
     }

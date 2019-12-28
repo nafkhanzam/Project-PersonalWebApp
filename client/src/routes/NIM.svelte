@@ -1,6 +1,7 @@
 <script>
   import { onHover } from "../utils";
   import { getNIMData } from "../assets";
+  import Error from "./components/Error.svelte";
   import Loading from "./components/Loading.svelte";
 
   let sortIdx = -1;
@@ -11,24 +12,29 @@
 
   const LOCAL_STORAGE_NAME = "nafkhanzam-nim-data";
   const LOCAL_STORAGE_VERSION = "nafkhanzam-nim-version";
-  let version = "1.0";
+  let version = "2019";
   let currVersion = localStorage.getItem(LOCAL_STORAGE_VERSION);
   let data;
   const DEFAULT_MAX = 10;
   let max = DEFAULT_MAX;
   let loading = true;
   let value = "";
+  let sortDown = true;
 
   function getSorter() {
     if (sortIdx === -1) {
       return () => Math.random() - 0.5;
     } else {
-      return (a, b) => a[sortIdx].localeCompare(b[sortIdx]);
+      return (a, b) => a[sortIdx].localeCompare(b[sortIdx])*(sortDown ? 1 : -1);
     }
   }
   async function getResultAsync() {
     setLoadmoreHover();
     max = DEFAULT_MAX;
+    if (!currVersion || currVersion !== version) {
+      localStorage.setItem(LOCAL_STORAGE_NAME, await getNIMData());
+      localStorage.setItem(LOCAL_STORAGE_VERSION, version);
+    }
     data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME));
     const lowerCaseValue = value.toLowerCase();
     if (!lowerCaseValue) {
@@ -53,22 +59,24 @@
   }
   let resPromise;
   function updateResult(sort) {
-    if (sort === sortIdx && sort !== -1) return;
-    if (typeof sort === "number" && sort >= -1 && sort <= 2) sortIdx = sort;
+    if (sort === sortIdx && sort !== -1) {
+      sortDown = !sortDown;
+    } else if (sort !== sortIdx) {
+      sortDown = true;
+    }
+    if (typeof sort === "number" && sort >= -1 && sort <= 2) {
+      sortIdx = sort;
+    }
     resPromise = getResultAsync();
   }
-  if (!currVersion || currVersion !== version) {
-    (async function() {
-      localStorage.setItem(LOCAL_STORAGE_NAME, await getNIMData());
-      localStorage.setItem(LOCAL_STORAGE_VERSION, version);
-      updateResult();
-    })();
-  } else {
-    updateResult();
+  updateResult();
+
+  function getSortSymbol(idx) {
+    return sortIdx === idx ? sortDown ? "↓" : "↑" : "";
   }
 </script>
 
-<h1>ITB NIM Finder</h1>
+<h1>ITB NIM Finder (ver. {version})</h1>
 <input type="text" class="form-control" bind:value on:input={updateResult} />
 <div class="mt-3">
   {#if resPromise}
@@ -81,22 +89,22 @@
             <tr>
               <th style="width: 15%" scope="col">
                 <a href="javascript:void(0)" on:click={() => updateResult(-1)}>
-                  {@html sortIdx === -1 ? '<u># (random)</u>' : '# (random)'}
+                  #
                 </a>
               </th>
               <th style="width: 45%" scope="col">
                 <a href="javascript:void(0)" on:click={() => updateResult(0)}>
-                  {@html sortIdx === 0 ? '<u>Name</u>' : 'Name'}
+                  Name {getSortSymbol(0)}
                 </a>
               </th>
               <th style="width: 20%" scope="col">
                 <a href="javascript:void(0)" on:click={() => updateResult(1)}>
-                  {@html sortIdx === 1 ? '<u>NIM 1</u>' : 'NIM 1'}
+                  NIM TPB {getSortSymbol(1)}
                 </a>
               </th>
               <th style="width: 20%" scope="col">
                 <a href="javascript:void(0)" on:click={() => updateResult(2)}>
-                  {@html sortIdx === 2 ? '<u>NIM 2</u>' : 'NIM 2'}
+                  NIM {getSortSymbol(2)}
                 </a>
               </th>
             </tr>
@@ -121,6 +129,8 @@
           </tbody>
         </table>
       {/if}
+    {:catch err}
+      <Error {err} />
     {/await}
   {:else}
     <Loading />

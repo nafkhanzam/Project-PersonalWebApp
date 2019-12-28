@@ -1,23 +1,24 @@
 import showdown from "showdown";
 import * as utils from "./utils";
 
-const API_URL = "http://localhost:3000";
-const ASSETS_URL = `${API_URL}/assets`;
+const BACKEND_URL = "http://localhost:3000";
+const ASSETS_URL = `${BACKEND_URL}/assets`;
+const API_URL = `${BACKEND_URL}/api`;
 
 export async function getCVBlob() {
 	return await utils.getBlob(`${ASSETS_URL}/CV v1.1.4.pdf`);
 }
 
 export async function getNIMData() {
-	const data = await utils.getJson("/api/nim_data.json");
+	const data = await utils.getJson(`${ASSETS_URL}/nim_data.json`);
 	if (!data) {
 		return null;
 	}
-	return JSON.stringify(data);
+	return JSON.stringify(data.data);
 }
 
 export async function getBlogs() {
-	return utils.getJson(`${ASSETS_URL}/blogs.json`);
+	return utils.getJson(`${API_URL}/bloglist`);
 }
 
 export async function getBlog(name) {

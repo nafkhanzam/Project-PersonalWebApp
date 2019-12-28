@@ -1,9 +1,15 @@
+import path from "path";
 import configFile from "../config.json";
 
 export class Config {
 	private static _URL: string;
 	private static _PORT: number;
 	private static _STATICS: Array<[string, string]>;
+	private static _SERVER_DIR: string;
+
+	static get SERVER_DIR() {
+		return Config._SERVER_DIR;
+	}
 
 	static get URL() {
 		return Config._URL;
@@ -27,6 +33,7 @@ export class Config {
 		Config._PORT = port;
 		// @ts-ignore
 		Config._STATICS = statics;
+		Config._SERVER_DIR = path.join(__dirname, "..");
 	}
 
 	static isDevelopment() {

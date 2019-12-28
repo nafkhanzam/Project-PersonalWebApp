@@ -38,7 +38,9 @@
         <img
           class="rounded"
           src={item.img || `https://picsum.photos/352/240?${i}`}
-          alt={item.alt || item.title} />
+          alt={item.alt || item.title}
+          width="352"
+          height="240" />
       </div>
       <div class="card-body">
         <h5 class="card-title">{item.title}</h5>

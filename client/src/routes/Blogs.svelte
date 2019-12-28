@@ -9,7 +9,7 @@
   let blogsPromise = getBlogsData();
   async function getBlogsData() {
     blogsPromise = await Promise.all(
-      (await getBlogs()).data
+      (await getBlogs())
         .map(async val => {
           const blogData = await getBlogJson(val);
           if (!blogData) {

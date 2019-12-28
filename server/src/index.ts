@@ -1,5 +1,7 @@
 import path from "path";
 
+import { Api } from "./Api";
+
 import express from "express";
 
 // import express from "express";
@@ -14,8 +16,11 @@ Config.init();
 const server = new Server();
 server.useStatic(...Config.STATICS);
 
-// TODO: Custom response when file doesn't exist
 server.app.use(express.static(path.join(__dirname, "../../client/public")));
+
+const api = new Api();
+server.app.use("/api", api.router);
+
 server.app.get("*", (_, res) =>
 	res.sendFile(path.join(__dirname, "../../client/public/index.html")),
 );
