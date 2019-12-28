@@ -29,12 +29,22 @@ export async function getBlob(path) {
 	const response = await axios({
 		url: path,
 		method: "GET",
-		responseType: "blob",
+		responseType: "arraybuffer",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/pdf",
+		},
 		validateStatus: () => true,
 	});
 	if (response.status >= 400) {
 		return null;
 	}
+	const url = window.URL.createObjectURL(new Blob([response.data]));
+	const link = document.createElement("a");
+	link.href = url;
+	link.setAttribute("download", "Moch. Nafkhan Alzamzami - CV.pdf");
+	document.body.appendChild(link);
+	link.click();
 	return response.data;
 }
 

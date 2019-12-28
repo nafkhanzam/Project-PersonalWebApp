@@ -1,7 +1,7 @@
 import showdown from "showdown";
 import * as utils from "./utils";
 
-const BACKEND_URL = "http://localhost:3000";
+const BACKEND_URL = "";
 const ASSETS_URL = `${BACKEND_URL}/assets`;
 const API_URL = `${BACKEND_URL}/api`;
 
