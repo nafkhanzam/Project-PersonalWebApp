@@ -28,12 +28,12 @@ export class Config {
 		if (this.isProduction()) {
 			Object.assign(config, configFile.production);
 		}
-		const { url, port, statics } = config;
+		const { url, statics } = config;
 		Config._URL = url;
-		Config._PORT = port;
+		Config._PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 		// @ts-ignore
 		Config._STATICS = statics;
-		Config._SERVER_DIR = path.join(__dirname, "..");
+		Config._SERVER_DIR = path.join(__dirname, "../..");
 	}
 
 	static isDevelopment() {

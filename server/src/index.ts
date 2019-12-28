@@ -16,13 +16,15 @@ Config.init();
 const server = new Server();
 server.useStatic(...Config.STATICS);
 
-server.app.use(express.static(path.join(__dirname, "../../client/public")));
+server.app.use(
+	express.static(path.join(Config.SERVER_DIR, "../client/public")),
+);
 
 const api = new Api();
 server.app.use("/api", api.router);
 
 server.app.get("*", (_, res) =>
-	res.sendFile(path.join(__dirname, "../../client/public/index.html")),
+	res.sendFile(path.join(Config.SERVER_DIR, "../client/public/index.html")),
 );
 
 server.startServer(Config.PORT, () => {

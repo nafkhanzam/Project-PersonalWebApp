@@ -9,7 +9,7 @@
 	"private": true,
 	"scripts": {
 		"build": "(if exist dist rmdir dist /s /q) && tsc",
-		"start": "node dist",
+		"start": "node dist/src/index",
 		"dev": "nodemon"
 	},
 	"dependencies": {

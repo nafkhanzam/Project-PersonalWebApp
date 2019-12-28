@@ -1,6 +1,5 @@
 {
 	"default": {
-		"port": 3000,
 		"url": "localhost",
 		"statics": [["/assets", "public", true]]
 	},
