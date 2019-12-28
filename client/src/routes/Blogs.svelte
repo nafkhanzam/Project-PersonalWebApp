@@ -5,12 +5,15 @@
 
   let tags = new Set();
   let selectedTags = new Set();
+  let blogList;
 
   let blogsPromise = getBlogsData();
   async function getBlogsData() {
+    if (!blogList) {
+      blogList = await getBlogs();
+    }
     blogsPromise = await Promise.all(
-      (await getBlogs())
-        .map(async val => {
+        blogList.map(async val => {
           const blogData = await getBlogJson(val);
           if (!blogData) {
             return null;
