@@ -1,5 +1,6 @@
 <script>
-  import { Router, Route } from "svelte-navaid";
+  import Router from "svelte-navaid/Router.svelte";
+  import Route from "svelte-navaid/Route.svelte";
   import Home from "./routes/Home.svelte";
   import Portfolio from "./routes/Portfolio.svelte";
   import Blog from "./routes/Blog.svelte";

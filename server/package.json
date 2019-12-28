@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"build": "(if exist dist rmdir dist /s /q) && tsc",
+		"build": "tsc",
 		"start": "node dist/src/index",
 		"dev": "nodemon"
 	},
