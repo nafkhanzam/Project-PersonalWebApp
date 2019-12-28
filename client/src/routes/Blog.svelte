@@ -1,5 +1,6 @@
 <script>
-  import { getBlog, toPrettyDate } from "../utils";
+  import { toPrettyDate } from "../utils";
+  import { getBlog } from "../assets";
   import NotFound from "./notFound.svelte";
   import Loading from "./components/Loading.svelte";
   export let blog;
@@ -19,7 +20,7 @@
 {#await contentPromise}
   <Loading />
 {:then result}
-  {#if !result || result.length < 2 || !result[0] || !result[1]}
+  {#if !result} <!-- || result.length < 2 || !result[0] || !result[1] -->
     <NotFound {message} />
   {:else}
     <h1>{result[0].title}</h1>

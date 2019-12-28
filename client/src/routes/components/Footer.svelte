@@ -14,6 +14,9 @@
   button[disabled] {
     pointer-events: none;
   }
+  textarea {
+    resize: none;
+  }
 </style>
 
 <footer class="page-footer font-small blue pt-4 bg-dark text-white mt-5">

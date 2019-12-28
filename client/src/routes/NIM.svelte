@@ -1,5 +1,6 @@
 <script>
-  import { getNIMData, onHover } from "../utils";
+  import { onHover } from "../utils";
+  import { getNIMData } from "../assets";
   import Loading from "./components/Loading.svelte";
 
   let sortIdx = -1;

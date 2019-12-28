@@ -1,17 +1,13 @@
 <script>
   import axios from "axios";
-  import { downloadCV } from "../utils";
+  import { getCVBlob } from "../assets";
 
   let downloading = false;
   let hover = false;
   function handleDownloadCV() {
     downloading = true;
-    downloadCV().then(response => {
-      if (
-        response.status >= 400 ||
-        (response.headers["content-type"] &&
-          response.headers["content-type"].includes("html"))
-      ) {
+    getCVBlob().then(data => {
+      if (!data) {
         alert("File not found! Please contact admin to update it!");
       }
     });

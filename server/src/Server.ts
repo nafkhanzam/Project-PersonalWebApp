@@ -10,10 +10,13 @@ export class Server {
 		this.app.listen(port, cb);
 	}
 
-	useStatic(...map: Array<[string, string]>) {
-		map.forEach(element =>
-			this.app.use(element[0], express.static(element[1])),
-		);
+	useStatic(...map: Array<[string, string, boolean?]>) {
+		map.forEach(element => {
+			this.app.use(element[0], express.static(element[1]));
+		});
+		map.filter(element => element[2]).forEach(element => {
+			this.app.use(element[0], (_req, res) => res.sendStatus(404));
+		});
 	}
 
 	serve(url: string, path: string) {

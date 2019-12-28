@@ -2,7 +2,7 @@
 	"default": {
 		"port": 3000,
 		"url": "localhost",
-		"statics": [["/api", "public"]]
+		"statics": [["/assets", "public", true]]
 	},
 	"production": {
 		"url": "http://nafkhanzam.herokuapp.com"

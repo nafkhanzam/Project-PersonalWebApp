@@ -1,22 +1,34 @@
 <script>
-  import { getJSON, toPrettyDate } from "../utils";
+  import { toPrettyDate } from "../utils";
+  import { getBlogs, getBlogJson } from "../assets";
   import Loading from "./components/Loading.svelte";
 
   let tags = new Set();
   let selectedTags = new Set();
 
-  let blogsPromise = getBlogs();
-  async function getBlogs() {
-    tags.clear();
+  let blogsPromise = getBlogsData();
+  async function getBlogsData() {
     blogsPromise = await Promise.all(
-      (await getJSON("/api/blogs.json")).data
+      (await getBlogs()).data
         .map(async val => {
-          const blogData = await getJSON(`/api/blogs/${val}.json`);
-          if (!blogData) return null;
-          if (blogData.tags) blogData.tags.forEach(tag => tags.add(tag));
+          const blogData = await getBlogJson(val);
+          if (!blogData) {
+            return null;
+          }
+          if (blogData.tags) {
+            blogData.tags.forEach(tag => tags.add(tag));
+          }
+          tags = tags;
           return { url: val, ...blogData };
         })
-        .sort(data => data.date)
+    ).then(data => data
+      .filter(val => val)
+      .filter(val => {
+        return !selectedTags.size || val.tags.some(tag => selectedTags.has(tag));
+      })
+      .sort(data => {
+        return data.date;
+      })
     );
   }
 </script>
@@ -48,6 +60,7 @@
           on:click={() => {
             selectedTags.clear();
             selectedTags = selectedTags;
+            getBlogsData();
           }}
           class="badge badge-pill badge-primary ml-2">
           Clear &times;
@@ -65,6 +78,7 @@
                 selectedTags.add(tag);
               }
               selectedTags = selectedTags;
+              getBlogsData();
             }}
             class={`badge badge-pill badge-${selectedTags.has(tag) ? 'warning' : 'dark'} m-1`}>
             {tag}
