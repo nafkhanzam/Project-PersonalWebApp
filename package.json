@@ -5,9 +5,13 @@
 	"repository": "https://github.com/nafkhanzam/website.git",
 	"author": "nafkhanzam <nafkhanalzamzami@gmail.com>",
 	"license": "MIT",
+	"engines": {
+		"node": "12.13.0"
+	},
 	"scripts": {
 		"dev": "concurrently \"yarn run server\" \"yarn run client\"",
 		"client": "cd client && yarn run dev",
-		"server": "cd server && yarn run dev"
+		"server": "cd server && yarn run dev",
+		"start": "node server/dist"
 	}
 }
