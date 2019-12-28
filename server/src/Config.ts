@@ -1,5 +1,5 @@
 import path from "path";
-import configFile from "../config.json";
+import configFile from "./web.config.json";
 
 export class Config {
 	private static _URL: string;
@@ -33,7 +33,7 @@ export class Config {
 		Config._PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 		// @ts-ignore
 		Config._STATICS = statics;
-		Config._SERVER_DIR = path.join(__dirname, "../..");
+		Config._SERVER_DIR = path.join(__dirname, "..");
 	}
 
 	static isDevelopment() {
