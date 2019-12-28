@@ -1,16 +1,12 @@
 <script>
   import axios from "axios";
-  import { getCVBlob } from "../assets";
+  import { getCVLink } from "../assets";
 
   let downloading = false;
   let hover = false;
   function handleDownloadCV() {
     downloading = true;
-    getCVBlob().then(data => {
-      if (!data) {
-        alert("File not found! Please contact admin to update it!");
-      }
-    });
+    location.href = getCVLink();
   }
 </script>
 
