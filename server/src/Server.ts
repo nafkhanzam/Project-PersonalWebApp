@@ -1,5 +1,7 @@
 import express from "express";
 
+import cors from "cors";
+
 export class Server {
 	app: express.Express;
 	constructor() {
@@ -8,6 +10,10 @@ export class Server {
 
 	startServer(port: number, cb?: (...args: Array<any>) => void) {
 		this.app.listen(port, cb);
+	}
+
+	useCors(options?: cors.CorsOptions | cors.CorsOptionsDelegate) {
+		this.app.use(cors(options));
 	}
 
 	useStatic(...map: Array<[string, string, boolean?]>) {

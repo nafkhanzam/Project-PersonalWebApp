@@ -14,6 +14,7 @@ import { Log } from "./Log";
 Config.init();
 
 const server = new Server();
+server.useCors();
 server.useStatic(...Config.STATICS);
 
 server.app.use(

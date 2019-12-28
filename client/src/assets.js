@@ -6,7 +6,7 @@ const ASSETS_URL = `${BACKEND_URL}/assets`;
 const API_URL = `${BACKEND_URL}/api`;
 
 export async function getCVBlob() {
-	return await utils.getBlob(`${ASSETS_URL}/CV v1.1.4.pdf`);
+	return await utils.getBlob(`${ASSETS_URL}/CV.pdf`);
 }
 
 export async function getNIMData() {

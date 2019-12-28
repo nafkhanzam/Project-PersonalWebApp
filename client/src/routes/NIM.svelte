@@ -34,6 +34,7 @@
     if (!currVersion || currVersion !== version) {
       localStorage.setItem(LOCAL_STORAGE_NAME, await getNIMData());
       localStorage.setItem(LOCAL_STORAGE_VERSION, version);
+      currVersion = version;
     }
     data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME));
     const lowerCaseValue = value.toLowerCase();
