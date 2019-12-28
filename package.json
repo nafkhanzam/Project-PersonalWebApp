@@ -13,6 +13,6 @@
 		"dev": "concurrently \"yarn run server\" \"yarn run client\"",
 		"client": "cd client && yarn run dev",
 		"server": "cd server && yarn run dev",
-		"start": "cd client && yarn && yarn run build && cd ../server && yarn && yarn run build && yarn run start"
+		"start": "(yarn && yarn run build && yarn && yarn run build && yarn run start)"
 	}
 }
