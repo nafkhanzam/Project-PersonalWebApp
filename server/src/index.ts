@@ -31,6 +31,9 @@ server.app.get("*", (_, res) =>
 server.startServer(Config.PORT, () => {
 	Log.info(`Listening to port ${Config.PORT}...`);
 	if (Config.isProduction()) {
-		pingmydyno(Config.URL);
+		pingmydyno(Config.URL, {
+			pingInterval: 1 * 60 * 1000, // 2 minutes
+			maxRetry: 5,
+		});
 	}
 });
